@@ -1,0 +1,10 @@
+#include <iostream>
+using namespace std;
+
+int main()
+{
+    string s;
+    cout << "Gib ein String" << endl;
+    cin >> s;
+    cout << s.length();
+}

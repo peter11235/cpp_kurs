@@ -136,3 +136,74 @@ Header files:
 
     To compile:
         g++ -Wall -o <name> function_file.cpp main_file.cpp
+
+------------------------------------------------------------------------
+Test-tips
+typische und untypische fälle
+-untypische Fälle:
+    Fehlerfälle (zb Wurzel aus negativer Zahl)
+    Randfälle (am Rand eines Gebiets, wo sich der algorismus ändert, 
+    zB Wurzel aus 0, beim Sortieren: schon sortierte Daten, rückwärts sortierte
+    Daten, Wochentagsalgorithmus: Monate Januar/Feb und monate März - Dez
+    (wegen der monatszählung ab märz), rundes Jahrhundert und Jahr davor und 
+    danach
+    Testdaten händische ausrechnen, zb wurzel(4)
+    Nachschlagen (google, Kalender)
+----------------------------------------------------------------------------
+struct
+
+    - es gibt in c++ einfache datentypen (int, float) und 
+        zusammengesetzte (aus vorhanden zusammengebiet)
+    - zusammengesetzte können vordefiniert sein in bibliothek oder selbst
+        definiert.
+    - 2 fast äquivalente Arten 'struct' und 'class'
+Beispiel 'return' kann nur eine Variable züruckgeben
+Was, wenn eine funktion mehrere ergebnisse hat?
+
+Lösung: Definition in Header-file
+
+struct Datum
+{
+    int day;
+    int month;
+    int year;
+};
+  
+Benutzung:
+
+Datum date; // neue variable anlegen  
+
+date.day = 23;
+date.month = 5;
+date.year = 1994;
+
+Funktion:
+
+Datum ostern(int year)
+{   
+    Datum date;
+    ...
+    return date;
+}
+
+Datum easter = oster(2015);
+
+//seit c++ 11:
+
+auto easter = oster(2015);
+--------------------------------------------------------------------------
+
+Schleifen (Loops)
+
+-den selben code mit unterschiedlichen variablen (oder werten in den variablen)
+    immer wieder ausführen
+
+while(bedingung)
+{
+    ...
+}
+    
+for(intit; bedingung; inkrement)
+{
+    ...
+}   

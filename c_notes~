@@ -207,3 +207,79 @@ for(intit; bedingung; inkrement)
 {
     ...
 }   
+
+break; //exit loop
+continue; //direkt zum schleifenkopf
+
+--------------------------------------------------------------------------
+
+Strings:
+
+    std::string ist ein vordefinierter Typ('class')
+
+----------------------------------------------------------------------------
+
+Verallgemeinern: Folge von elementen bit beliebigem(arbitrary) Typ 
+
+std::vector // #include <vector>
+
+//Syntax:
+std::vector<ElementTyp> v;
+
+std::vector<int> v = {1,1,2,3,5,8,13};
+
+//v[2] => 1
+
+//Man darf mit syntax v[n] nur auf Elementen zugreifen, die schon existierern,
+//sonst Programmabsturtz
+// 0 <= n < v.size()
+//Alternitive: v.at(n) : will check the out of bounds exception
+
+
+//Größe des Vectors festlegen:
+//- Bei init:
+int size = 4;
+vector<int> v(size);
+v => {0,0,0,0};
+//Vector is now initialized to all zeros.
+
+//Größe mit Anfangswerten
+
+//Größe später ändern
+v.resize(new_size);
+
+//Größe bei Einfügen neuer Elemente anpassen
+v.push_back(new_element);
+
+v.insert(v.begin()+position, new_element); // bedeutet 'new_element' inserted at position
+
+//push_back() ist effizienter als insert()
+
+-------------------------------------------------------------------------------------
+
+# Aliasing in Kommandozeile:
+
+alias [name='value']
+
+alias g11='g++ -std=c++11 -Wall'
+
+----------------------------------------------------------------------------------
+
+Warum ist push_back() effizienter als insert?
+    *vector muss intern Speicher für alle Elemente anlegen (also mindestens soviel
+    Speicher, wie für size() elemente notwendig ist)
+    *wenn ein neues Element eingefügt wird, braucht der vector mehr Speicher
+    *Naives Vorgehen:
+        old_size = v.size();
+        new_size = old_size + 1;
+        neuen Speicher der Größe new_size besorgen.
+        Vorhandene Elemente aus dem alten in den neuen Speicher kopieren.
+        im neuen Speicher das Neue Element einfügen, den alten Speicher wegwerfen.
+        
+    *push_back():
+        old_size = v.size();
+        new_size = old_size * 2;
+        Deshalb im neuen Speicher sind jetzt noch 'old_size - 1'Elemente unbenutzt
+        pushback braucht dann keinen neuen Speichter, weil ja genug Reserve 
+        Das erste kopieren ist wieder notwendig, wenn new_size erschöpft ist, also
+        nach 'old_size'-mall push_back()

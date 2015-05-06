@@ -93,6 +93,12 @@ int main()
     //cout << "Neue String: \n" << umdrehen(s); << endl;
     //cout << "Neue String: \n" << to_lower(s) << endl;
     //cout << "Neue String: \n" << no_spaces(s) << endl;
-    cout << "Ergebnis: \n" << is_palindrome(s) << endl;
-    
+    if (is_palindrome(s))
+    {
+        cout << "\"" << s << "\"" << " is a palindrome." << endl;
+    }
+    else
+    {
+        cout << "\"" << s << "\"" << " is not a palindrome." << endl;
+    }
 }

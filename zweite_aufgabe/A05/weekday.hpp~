@@ -1,0 +1,3 @@
+#include "date.hpp"
+
+std::string weekday(Date d);

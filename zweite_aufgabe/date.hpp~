@@ -1,0 +1,10 @@
+
+struct Date
+{
+
+    int day;
+    int month;
+    int year;
+};
+
+std::string to_string(Date d; bool numbered_months);

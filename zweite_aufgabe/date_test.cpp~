@@ -1,0 +1,26 @@
+#include <iostream>
+#include <cassert>
+#include "date.hpp"
+
+using namespace std;
+
+int main()
+{
+    Date d1 = new Date(23,5,1994);
+    Date d2 = new Date(25,12,2015);
+    Date d3 = new Date(31,10,1989);
+    Date d4 = new Date(6,5,2015);
+    Date d5 = new Date(12,4,2015);
+    
+    assert(date::to_string(d1, true) == "23.5.1994");
+    assert(date::to_string(d1, false) == "23. Mai 1994");
+    assert(date::to_string(d2, true) == "25.12.2015");
+    assert(date::to_string(d2, false) == "25. Dezember 2015");
+    assert(date::to_string(d3, true) == "31.10.1989");
+    assert(date::to_string(d3, false) == "31. Oktober 1989");
+    assert(date::to_string(d4, true) == "6.5.2015");
+    assert(date::to_string(d4, false) == "6. Mai 2015");
+    assert(date::to_string(d5, true) == "12.4.2015");
+    assert(date::to_string(d5, true) == "12. April 2015");
+    cout << "Alle Tests erfolgreich" << endl;
+}

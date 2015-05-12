@@ -1,0 +1,14 @@
+#include <iostream>
+
+int main()
+{
+    int c;
+    std::cout << "Geben Sie ein Zahl" << std::endl;
+    std::cin >> c;
+    
+    for (int i = 1; i <= c; i++)
+    {
+        std::cout << i << "\n";
+    }
+
+}

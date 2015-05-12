@@ -8,7 +8,11 @@ int main()
     Es war hilfreich die Ergebnisse verschiedener Kombinationen zu sehen.
     */
     
+<<<<<<< HEAD
     std::cout << "Uhh" << std::endl;
+=======
+    //std::cout << "Uhh" << std::endl;
+>>>>>>> d36fe940da379eb03f369f4b33de2921db0550e8
     int x1 = 7;
     int y1 = 2;
     x1 /= y1;

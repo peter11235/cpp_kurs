@@ -1,0 +1,288 @@
+C++ 
+
+ - Compiler gebraucht denn cpu versteht nur Machinecode
+ - menschen lesen machine ode nicht gern
+ - (ausführen - run/interpret; kompilieren)
+ - 2 Teil
+	1. Eigenen code
+		- erste Befehl kommt direkt after int main() {		
+	2. Bibliotheken
+		i. compiled code: ".a", ".so" (linux); ".lib", ".dll" (windows)
+		ii. wichtiger: inhaltsverzeichnis, header: .h, .hpp, .hxx
+ 
+ - Um in eigenen code Bib zu benutzen braucht man nur inhaltsverzeichnis:
+	#include <bib name>
+
+ I. Kompilier erzeugt das ausführbar Program in 2 Phasen:
+	1. Übersetzung der .cpp datien in Machinesprache
+		=> Objektdatei (.o in Linux; .obj in Windows)
+		(g++ -c helloworld.cpp)
+
+	2. Linking: alle programteile (objektdatei, bibliotheksdatei) zu einer ausfühbaren Datei verbinden 
+		(g++ -o helloworld helloworld.o)
+
+	1+2 zusammen: g++ -o helloworld helloworld.cpp
+
+ II. Was tut ein Computer?
+	1. der Speicher mit der Eingabe füllen
+	2. Program verändert der Speicher
+	3. die Speicherbelegung am Ende ist Ergebnis
+
+	- Hochsprache nutzen variables, statt Adresse
+	-Variable
+		1. Namen
+			- a-zA-Z_0-9
+			- "_" am anfang ist reserviert für die std bib; verboten.
+		2. ein dazgehöriges Speicher
+		3. Typ
+			- legt fest, wie der speicher implementiert wird unt welche Operation erlaubt sind
+
+	- zB: std::cout ist variable von std library
+	- Operators: << is left shift
+	- Literale:
+		in "" ist Stringliteral
+		321 ist Integerliteral
+		3.1 oder 3.1e-4 sind float
+		true/false ist boolscheliteral
+		in '' ist Zeichenliteral
+		
+--------------------------------------------------------------------------------------------------
+
+I. Strings - std::string
+  1. Declaration
+    typname variablename [ = init];
+    zB: std::string var;
+    
+  2. Concatenation: 
+    std::cout << "Hello, " << var << std::endl;
+    
+II. Arithmetik
+  1. Zahldatentyp 
+    - Ganze zahl (pos/neg) -> int
+    - natürliche zahlen (>=0) -> unsigned
+    - wahrheitwerte (true/false) -> bool
+    - reele Zahlen -> float (32 bit) / double (64 bit)
+	zb: double d = 1.4e-12;
+	
+  2. Übliche arithmetische operationen: +,-,*,/
+    - Punktrechnung oder strichrechnung
+    - Ausdrück in Klammern zuerst
+    - Integerdivision 
+      - 3/2 -> 1; 3.0/2 -> 1.5
+      
+  3. Rest (remainder) 
+    d = a/b; a = d*b + rest; rest = a - (a/b) * b
+    
+  4. Typumwandlung
+    double f = 1.5;
+    int i = f; // implizite 
+    //ODER
+    int i = (int)f; //explizite
+    int i = static_cast<int>(f); //auch explizite
+    
+  5. Algebraisiche Funktionen - #include <cmath>
+    - sqrt(f); sin(f); cos(f); tan(f); exp(f); pow(f,n); log(f)
+    - Rundungsfunktionen: result always double
+      floor(f); //largest int less than f 
+      ciel(f); //smallest int greater than f
+      round(f); //round zur nächtste ganze zahl
+
+III. Boolsche Operationen
+    a == b
+    a != b
+    a < b
+    a <= b
+    a > b
+    a >= b
+
+    Und: &&
+    Oder: ||
+    Nicht: !
+--------------------------------------------------------------------------------
+Funktionen
+
+    - Kapseln häufig benotigen code, damit man ihn nur einmal schreiben muss und wiederverwenden kann.
+    - Haben ein Name: [a-zA-Z][0-9]_ (nicht mit zahl beginnnen darf)
+    - Haben argumenten, die paar sind: Typ und Name; durch komma getrennt.
+    - Haben ergebnis, das Typ ist.
+    - Syntax für declaration (in header file mit .hpp) einer bibliothek:
+
+    Ergebnistyp funktionname(
+        Argtyp1 arg1 ...
+        ArgtypN argN);
+
+    - Syntax für definition (.cpp):
+
+    Ergebnistyp funktionname(
+        Argtyp1 arg1 ...
+        ArgtypN argN)
+    {
+        ...
+    }
+    - Wenn die funktion nichts zurück gibt, verwendet man "void".
+
+    Beispiel:
+    
+    int mod(int a, int b)
+    {
+        return a - (a/b)*b;
+    }
+
+Header files:
+
+    .hpp file has declaration 
+    .cpp function file has #includes "headername" and definition
+    .cpp main file has #includes "headername"
+
+    To compile:
+        g++ -Wall -o <name> function_file.cpp main_file.cpp
+
+------------------------------------------------------------------------
+Test-tips
+typische und untypische fälle
+-untypische Fälle:
+    Fehlerfälle (zb Wurzel aus negativer Zahl)
+    Randfälle (am Rand eines Gebiets, wo sich der algorismus ändert, 
+    zB Wurzel aus 0, beim Sortieren: schon sortierte Daten, rückwärts sortierte
+    Daten, Wochentagsalgorithmus: Monate Januar/Feb und monate März - Dez
+    (wegen der monatszählung ab märz), rundes Jahrhundert und Jahr davor und 
+    danach
+    Testdaten händische ausrechnen, zb wurzel(4)
+    Nachschlagen (google, Kalender)
+----------------------------------------------------------------------------
+struct
+
+    - es gibt in c++ einfache datentypen (int, float) und 
+        zusammengesetzte (aus vorhanden zusammengebiet)
+    - zusammengesetzte können vordefiniert sein in bibliothek oder selbst
+        definiert.
+    - 2 fast äquivalente Arten 'struct' und 'class'
+Beispiel 'return' kann nur eine Variable züruckgeben
+Was, wenn eine funktion mehrere ergebnisse hat?
+
+Lösung: Definition in Header-file
+
+struct Datum
+{
+    int day;
+    int month;
+    int year;
+};
+  
+Benutzung:
+
+Datum date; // neue variable anlegen  
+
+date.day = 23;
+date.month = 5;
+date.year = 1994;
+
+Funktion:
+
+Datum ostern(int year)
+{   
+    Datum date;
+    ...
+    return date;
+}
+
+Datum easter = oster(2015);
+
+//seit c++ 11:
+
+auto easter = oster(2015);
+--------------------------------------------------------------------------
+
+Schleifen (Loops)
+
+-den selben code mit unterschiedlichen variablen (oder werten in den variablen)
+    immer wieder ausführen
+
+while(bedingung)
+{
+    ...
+}
+    
+for(intit; bedingung; inkrement)
+{
+    ...
+}   
+
+break; //exit loop
+continue; //direkt zum schleifenkopf
+
+--------------------------------------------------------------------------
+
+Strings:
+
+    std::string ist ein vordefinierter Typ('class')
+
+----------------------------------------------------------------------------
+
+Verallgemeinern: Folge von elementen bit beliebigem(arbitrary) Typ 
+
+std::vector // #include <vector>
+
+//Syntax:
+std::vector<ElementTyp> v;
+
+std::vector<int> v = {1,1,2,3,5,8,13};
+
+//v[2] => 1
+
+//Man darf mit syntax v[n] nur auf Elementen zugreifen, die schon existierern,
+//sonst Programmabsturtz
+// 0 <= n < v.size()
+//Alternitive: v.at(n) : will check the out of bounds exception
+
+
+//Größe des Vectors festlegen:
+//- Bei init:
+int size = 4;
+vector<int> v(size);
+v => {0,0,0,0};
+//Vector is now initialized to all zeros.
+
+//Größe mit Anfangswerten
+
+//Größe später ändern
+v.resize(new_size);
+
+//Größe bei Einfügen neuer Elemente anpassen
+v.push_back(new_element);
+
+v.insert(v.begin()+position, new_element); // bedeutet 'new_element' inserted at position
+
+//push_back() ist effizienter als insert()
+
+-------------------------------------------------------------------------------------
+
+# Aliasing in Kommandozeile:
+
+alias [name='value']
+
+alias g11='g++ -std=c++11 -Wall'
+
+----------------------------------------------------------------------------------
+
+Warum ist push_back() effizienter als insert?
+    *vector muss intern Speicher für alle Elemente anlegen (also mindestens soviel
+    Speicher, wie für size() elemente notwendig ist)
+    *wenn ein neues Element eingefügt wird, braucht der vector mehr Speicher
+    *Naives Vorgehen:
+        old_size = v.size();
+        new_size = old_size + 1;
+        neuen Speicher der Größe new_size besorgen.
+        Vorhandene Elemente aus dem alten in den neuen Speicher kopieren.
+        im neuen Speicher das Neue Element einfügen, den alten Speicher wegwerfen.
+        
+    *push_back():
+        old_size = v.size();
+        new_size = old_size * 2;
+        Deshalb im neuen Speicher sind jetzt noch 'old_size - 1'Elemente unbenutzt
+        pushback braucht dann keinen neuen Speichter, weil ja genug Reserve 
+        Das erste kopieren ist wieder notwendig, wenn new_size erschöpft ist, also
+        nach 'old_size'-mall push_back()
+        
+v.resize() ändert v.size()
+v.reserve() ändert v.capacity(), aber nicht v.size()

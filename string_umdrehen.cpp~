@@ -1,0 +1,20 @@
+#include <iostream>
+using namespace std;
+/*
+string einlesen und nur jeden zweiten Buchstaben ausgeben
+*/
+int main()
+{
+    string s, n;
+    int l;    
+    cout << "Bitte geben Sie ein String" << endl;
+    getline(cin, s);
+    l = s.length();
+    for (int i = 1; i < l; i+=2)
+    {
+        n.append(1,s[i]);
+    }
+    
+    cout << "Neue String: \n" << n;
+    
+}

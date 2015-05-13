@@ -286,3 +286,84 @@ Warum ist push_back() effizienter als insert?
         
 v.resize() ändert v.size()
 v.reserve() ändert v.capacity(), aber nicht v.size()
+
+------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------
+
+StandardBibliothek Funktionen
+
+//hatten schon cin/cout benuzt
+//Es gibt auch ifstream (input file stream) and ofstream (output file stream)
+// zB:
+
+ifstream infile("filename.txt");
+
+//infile kann jetzt genauso werden wie std::cin
+
+int i;
+
+infile >> i;
+
+ofstream outfile("otherfile.txt");
+
+outfile << i;
+
+//If cant open:
+
+ifstream infile("filename.txt");
+
+if (!infile.is_open())
+{
+    cout << "Unable to read file." << endl;
+    return 1; //1 is error code, vielleicht existiert das File nicht
+}
+
+//Auch wichtig:
+
+file.good(); //bool: true if no flags (badbit, failbit, eofbit) are set
+
+// Funktionen der Std lösen häufig wiederkehrende Probleme
+
+//copy(); Kopiert ein Datenstruktur in eine andere. zB:
+
+vector<int> a = {1,2,3,4};
+vector<int> b(a.size()); //Muss die gleiche Länge haben
+copy(a.begin(), a.end(), b.begin());
+
+//Man kann die Zahlen beim Kopieren verändern. Dann heißt die Funktion transform();
+//Man Übergibt ihr als letzten Parameter, welche Veränderung man möchte. 
+//Genauer: man übergibt eine Funktion, die die Veränderung ausführt. zB:
+
+int quadrat(int i)
+{
+    return i*i;
+}
+
+int main()
+{
+    vector<int> a = {1,2,3,4};
+    vector<int> b(a.size());
+    copy(a.begin(), a.end(), b.begin(), quadrat);
+}
+
+//Sehr häufig muss man eine Array sortieren. dafür gibt's sort(). Dies sortiert 
+//einen vector in-place
+
+vector<int> a = {21,13,8,5,3,2,1,1};
+sort(a.begin(), a.end());
+print_vector(a);
+
+//Auch mit sort: ein comparator.
+bool comparator(typ x, typ y)
+{
+    ...
+}
+sort(a.begin(), a.end(), comparator);
+
+//Auch gibt's random_shuffle()
+
+vector<int> a = {21,13,8,5,3,2,1,1};
+random_shuffle(a.begin(), a.end());
+print_vector(a);
+
+

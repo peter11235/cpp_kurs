@@ -3,7 +3,6 @@
 
 using namespace std;
 
-
 template <typename T>
 void print_vector(vector<T> v)
 {
@@ -19,15 +18,17 @@ void print_vector(vector<T> v)
 
 int main()
 {
-
-    vector<double> dubs = {0.8123,1.3542, 1.9832, 3.015, 4.5198, 8.4980, 12.789};
     
-    cout<< "Als ints: \n"; 
-    print_vector(vec_to_int(dubs));
-    
-    cout<< "Gerundet: \n";
-    print_vector(vec_rounded(dubs));
-    
-   
+    vector<double> dubs = {0.8123,
+                            1.3542, 
+                            1.9832, 
+                            3.015, 
+                            4.5198,
+                             8.4980, 
+                             12.789,
+                             123456.12345,
+                             9987655543.009};
+    vector<string> strs = vec_to_string(dubs);
+    print_vector(strs);
     
 }

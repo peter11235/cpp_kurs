@@ -366,4 +366,49 @@ vector<int> a = {21,13,8,5,3,2,1,1};
 random_shuffle(a.begin(), a.end());
 print_vector(a);
 
+=============================================================================
+=============================================================================
+20.5 Stdbibliothek
+
+//Mehr Funktionen
+//copy_if(InputIterator first, InputIterator last, OutputIterator result, 
+//        Predicate pred);
+        
+//use:
+//result is OutputIterator
+auto result = copy_if(a.begin(),a.end(),b.begin(), is_even);
+//count is Zahl der kopierte Elemente
+int count = res-b.begin(); 
+b.resize(count)
+
+
+//count_if(InputIterator first, InputIterator last, OutputIterator result, 
+//        Predicate pred)
+
+//search(): search array for string
+//fill(): initialize array
+//reverse(): reverse sequence
+//rotate(): rotate a sequence so last becomes first, first becomes second,etc.
+
+//Datenstrukturen
+
+string, vector schon gelernt
+
+std::map<char,float> m;
+m['a'] = 1.3;
+...
+
+//Man muss keinen Speicher reservieren. Es ist automatisch
+//Intern speichert std::map die Daten als Suchbaum
+//Veransetzung: key typ muss < operation unterstützen; mit strings ist es lexicographical
+//Beliebte indextypen:
+//-string
+//-int (wenn man kein zusammenhangige indecies will, oder negative)
+
+//Varianten:
+//multimap: der selbe index kann mehr als ein element.
+//set:
+//unordered_map: same as map but no order (not BST, sondern Hashtable)
+
+
 

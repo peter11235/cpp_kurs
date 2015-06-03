@@ -410,5 +410,66 @@ m['a'] = 1.3;
 //set:
 //unordered_map: same as map but no order (not BST, sondern Hashtable)
 
+==============================================================================
 
+==============================================================================
+
+Referenzen:
+
+Neue Variablename für eine vorhandene Variable. Die Referenz hat:
+    - einen Typ, denselben wie die ursprüngliche Variable, 
+    -Speicher, aber keinen eigenen, sondern denselben wie die ursprünglichen variable
+
+int length(string s){return s.size();} //Pass by value
+int length(string & s){return s.size();} //Pass by reference mit & symbol
+
+erspart teure Kopie, aber es erlaubt auch, die ursprüngliche Variable innerhalb
+der Funktion zu ändern:
+
+void append_question(string & s){ s+= "?";} //Ändert die ursprüngliche variable
+
+Zwei Möglichkeiten für Referenzen zu nutzen:
+1. Die Funktion, der die Variable übergeben wird, will die variable modifizeren
+2. Die Funktion will die Variable nur lesen, nicht modifizieren. Dann haben
+Referenzen immer noch Sinn, weil man dadurch das Kopieren spart.
+
+Für Nummer zwei nutzt man "const &" um die param read-only zu machen.
+
+Vorsicht is geboten, wenn die ursprüngliche Variable vor der Referenz 
+freigegeben/gelöscht wird. Dann ist der Speicher, auf den die Referenz zeigt,
+nicht mehr vorhanden => Programabsturz, wenn man die Referenz zugreifft.
+Das heißt "Dangling reference"
+zB:
+
+string & create_string()
+{
+    string s = "abcd";
+    return s;
+}//Scope of s ends
+//in main:
+string & t = create_string();
+cout << t << endl; //Absturz, weil s ist gelöscht
+
+<chrono>
+auto start = std::chrono::high_resolution_clock::now()
+--------------------------------------------------------------------------------------
+
+Exception handling
+
+#include <stdexcept>
+
+Typische Verwendung: am anfang ein Funktion prüfen ob die ubergebene Argumente
+erlaubt sind.
+zB: sqrt(x) x must not be negative
+
+try 
+{
+
+}
+catch(exception& e)
+{
+
+}
+
+throw; keyword  ist analog zu 'return', aber es gibt eine Exception zurück.
 

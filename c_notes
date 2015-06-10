@@ -473,3 +473,158 @@ catch(exception& e)
 
 throw; keyword  ist analog zu 'return', aber es gibt eine Exception zurück.
 
+=========================================================================================
+=========================================================================================
+Zum Optimizierung mit Kompiler:
+g++ -O ...
+
+Eigenen Datentypen
+
+Wenn existierende Datentypen nicht optimal für die Aktuelle Aufgabe.
+
+zB: 
+    -Rationale Zahlen 
+    -Compexe Zahlen
+    - Bild mit vector 
+    
+Es gibt 3 Methoden, eigenen Datentypen zu machen:
+    1. struct
+    2. class
+    3. enum
+    
+Eine class vereint zusammengehörende Informationen einen datenstruktur.
+Besteht aus:
+    - öffentlichen Teil: funktionalität für benutzer der class - sollte
+        sich nur selten ändern
+    - internen Teil: für die Implementation und Speicherverwaltung- sollte
+        "gekapsult", also nicht von außen sichtbar
+    - default  => private
+
+    class Name 
+    {
+        //öffentliche Teil
+        public:
+        
+        //privaten Teil
+        private:
+        
+    };
+
+struct funkioniert praktish genauso, aber default ist public.
+
+Jede class braucht mindestens eine Constructor, der den Speicher der Variable
+initialisiert. Falls der Programmer keinen schreibt, generiert den Compiler einen 
+automatisch
+
+Constructor Arten:
+    - Standard constructor (default) hat keinen argumenten
+    - Kopierkonstructor kopiert eingegebene variable nach neue variable
+    
+Constructors sind funktionen, die nichts returnen (sie initialisieren)
+Konvention: die privaten Variablen einer Klasse werden oft mit dem Suffix '_' benannt
+
+Beispiel: 2D Point
+
+    class Point
+    {
+        public:
+            Point()
+            {
+                x_ = 12;
+                y_ = 25;
+            }
+        
+        private:
+            float x_, float y_;    
+    };
+    
+    //ODER:
+    class Point
+    {
+        public:
+            Point() : x_(12),y_(25)
+            {}
+        
+        private:
+            float x_, float y_;    
+    };
+    
+    //ODER:
+    class Point
+    {
+        public:
+            Point(Point const & other) :
+            x_(other.x_), y_(other.y_)
+            {}
+        
+        private:
+            float x_, float y_;    
+    };
+    
+    //ODER:
+    class Point
+    {
+        public:
+            Point(float x, float y) :
+            x_(x), y_(y)
+            {}
+            
+            float x() { return x_;};
+            float y() { return y_;};
+        private:
+            float x_, float y_;    
+    };
+    
+Um die Daten später zu ändern, gibt es mehrere Möglichkeiten:
+
+    - Zuweisungsoperator: 
+        Point p1(1,2);
+        Point p2(3,4);
+        p1 = p2;
+
+    - Explizit programmierte Zuweisungs operator:
+    
+    class Point
+    {
+        ...
+        public:
+            
+            Point & operator=(Point const & other)
+            {
+                x_ = other.x();
+                y_ = other.y();
+                return this*;
+            }
+    }
+    
+Wenn der Programierer die vom Compiler automatisch generierten Funktionen 
+verwenden will, kann er das seit C++ 11 mit dem Schlüsselwort "default" 
+explizit spezifizieren:
+
+    class Point
+
+    {
+
+      public:
+
+        Point(Point const & other) = default;
+
+        Point & operator=(Point const & other) = default;
+
+    };
+    
+Vorteil: leser sieht, dass es absicht war, dass sie nicht implementiert sind
+
+Möglichkeit 2:
+    schreibende Zugriffsfunktion:
+    
+    class Point
+    {
+        ...
+        public:
+            void setX(float newX)
+            {
+                x_ = newX;
+            }
+    }
+    

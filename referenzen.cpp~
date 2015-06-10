@@ -1,0 +1,43 @@
+#include <iostream>
+using namespace std;
+
+void append_question0(string s){ s+= "?";}
+void append_question1(string & s){ s+= "?";}
+
+string & create_string()
+{
+    string s = "abcd";
+    return s;
+}
+
+void my_swap(string & s, string & t)
+{
+    string q = s;
+    s = t;
+    t = q;
+}
+
+int main()
+{
+/*
+    string s = "Habe ich eine Fragezeichen";
+    append_question0(s);
+    cout << s << endl;
+    append_question1(s);
+    cout << s << endl;
+
+    string & t = create_string();
+    cout << t << endl; //Doesn't work b/c s is no longer in scope,
+                       //and t is just a reference to s.
+*/
+
+    string s = "1234";
+    string const & t = s;
+    s += "asdf";
+    t += "asdf";
+    cout << "s: " << s <<endl;
+    cout << "t: " << t <<endl;
+    //my_swap(s,t);
+    //cout << "s: " << s <<endl;
+    //cout << "t: " << t <<endl;
+}

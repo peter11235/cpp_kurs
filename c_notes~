@@ -574,3 +574,57 @@ Beispiel: 2D Point
         private:
             float x_, float y_;    
     };
+    
+Um die Daten später zu ändern, gibt es mehrere Möglichkeiten:
+
+    - Zuweisungsoperator: 
+        Point p1(1,2);
+        Point p2(3,4);
+        p1 = p2;
+
+    - Explizit programmierte Zuweisungs operator:
+    
+    class Point
+    {
+        ...
+        public:
+            
+            Point & operator=(Point const & other)
+            {
+                x_ = other.x();
+                y_ = other.y();
+                return this*;
+            }
+    }
+    
+Wenn der Programierer die vom Compiler automatisch generierten Funktionen 
+verwenden will, kann er das seit C++ 11 mit dem Schlüsselwort "default" 
+explizit spezifizieren:
+
+    class Point
+
+    {
+
+      public:
+
+        Point(Point const & other) = default;
+
+        Point & operator=(Point const & other) = default;
+
+    };
+    
+Vorteil: leser sieht, dass es absicht war, dass sie nicht implementiert sind
+
+Möglichkeit 2:
+    schreibende Zugriffsfunktion:
+    
+    class Point
+    {
+        ...
+        public:
+            void setX(float newX)
+            {
+                x_ = newX;
+            }
+    }
+    

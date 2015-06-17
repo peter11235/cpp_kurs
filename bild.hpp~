@@ -1,0 +1,14 @@
+#ifndef BILD_HPP
+#define BILD_HPP
+
+template <class T>
+class Image
+{
+    public:
+    
+    
+    private:
+        vector<value_type> data_;
+};
+
+#endif

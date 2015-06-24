@@ -629,5 +629,22 @@ Möglichkeit 2:
     }
 
 ========================================================================
+´`´`´`´`´`´`´`´`´`´`´`´`´`´`´`´`´`´`´`´`´`´`´`´`´`´`´`´`´`´`´`´`´`´`´`´`´`´`´`´`
+Default funktion argumente
+°°°°°°°°°°°°°°°°°°°°°°°°°°°
+int foo(int i, int j) { return i + j + 1;}
+
+//Default:
+int foo(int i = 0, int j = -1)
+{
+    return i + j + 1;
+}
+
+foo() == 0;
+foo(1) == 1; //i <- 1, so result is 1+-1+1.
+
+//Auch mit Konstruktor
+
+Image(int width=0, int height = 0) : ...
 
 
